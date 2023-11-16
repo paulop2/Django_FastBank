@@ -33,10 +33,18 @@ class UserManager( BaseUserManager ):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """User in system"""
-    # email = models.EmailField(max_length=255, unique=True)
+    email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=255, null=False)
-    first_name = models.CharField(max_length=255, null=False)
-    # cpf = models.CharField(null = True, upload_to=user_image_field)
+    last_name = models.CharField(max_length=255, null=False)
+    cpf = models.CharField(max_length=11, null=False, unique=True)
+    # url_image = models.ImageField(null = True, upload_to= user_image_field)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    created_at = models.DateTimeField(default=)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+
+    def __str__(self) -> str:
+        return f'{self.first_name}, {self.last_name}'
