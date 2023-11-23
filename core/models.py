@@ -1,11 +1,19 @@
-# Models da aplicação 
 
+import os
+import uuid
+from django.conf import settings 
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager,
     PermissionsMixin
 )
 from django.utils import timezone
+
+def user_image_field(instance, filename):
+    ext = os.path.splitext(filename)[1]
+    filename = f'{uuid.uuid4()}{ext}'
+
+    return os.path.join('uploads', 'user', filename)
 
 class UserManager( BaseUserManager ):
     """Manager for users."""
@@ -37,7 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=255, null=False)
     last_name = models.CharField(max_length=255, null=False)
     cpf = models.CharField(max_length=11, null=False, unique=True)
-    # url_image = models.ImageField(null = True, upload_to= user_image_field)
+    url_image = models.ImageField(null = True, upload_to = user_image_field)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)

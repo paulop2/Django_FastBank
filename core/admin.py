@@ -37,14 +37,15 @@ class UserAdmin(BaseUserAdmin):
                 'last_name',
                 'cpf',
                 'email',
+                'url_image',
                 'password1',
                 'password2',
                 'is_active',
                 'is_staff',
-                'is_superuser',
+                'is_superuser'
             )
         }),
     )
- 
+
 
 admin.site.register(models.User, UserAdmin)
