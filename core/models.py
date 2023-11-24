@@ -23,13 +23,14 @@ def user_image_field(instance, filename):
 
 class Conta(models.Model):
     """Conta para cada um dos cliente(usuários)"""
-    agencia = models.CharField(max_length=4, unique=True)
+    agencia = models.CharField(max_length=4)
     numero = models.CharField(max_length=8)
     saldo = models.DecimalField(max_digits=5, decimal_places=2)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.DO_NOTHING
     )
+    created_at = models.DateTimeField(default=timezone.now)
 
 
 class UserManager(BaseUserManager):
@@ -38,7 +39,7 @@ class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fiels):
         """Create, save and return a new user."""
         if not email:
-            raise ValueError("Voce precissa de um email")
+            raise ValueError("User must be an email address")
 
         user = self.model(email=self.normalize_email(email), **extra_fiels)
         user.set_password(password)
