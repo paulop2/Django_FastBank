@@ -67,9 +67,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=255, null=False)
     cpf = models.CharField(max_length=11, unique=True, null=False)
     url_imagem = models.ImageField(null=True, upload_to=user_image_field)
+    
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
+
+    login_attempts = models.PositiveIntegerField(default=0)
+    locked_at = models.DateTimeField(null=True, blank=True)
+    unlocked_at = models.DateTimeField(null=True, blank=True)
 
     objects = UserManager()
 
