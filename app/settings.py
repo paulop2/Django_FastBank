@@ -32,8 +32,7 @@ SECRET_KEY = '96fad124c9e93ba8a22488f3732ec9bf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS=['127.0.0.1']
 
 # Application definition
 
@@ -48,12 +47,15 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'core',
     'user',
-    'api'
+    'api',
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -61,6 +63,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'core.middleware.LoginAttemptsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True 
 
 ROOT_URLCONF = 'app.urls'
 
@@ -93,6 +97,7 @@ DATABASES = {
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
         'NAME': os.environ.get('DB_NAME'),
+        'PORT': '3306',
     }
 }
 

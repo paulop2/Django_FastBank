@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Conta
+from core.models import *
 
 
 class AccountSerializer(serializers.ModelSerializer):
@@ -26,3 +26,5 @@ class SaqueSerializer(serializers.Serializer):
     
     class Meta:
         fields = ['value']
+
+        
