@@ -32,7 +32,9 @@ SECRET_KEY = '96fad124c9e93ba8a22488f3732ec9bf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS=['127.0.0.1']
+CORS_ALLOW_ALL_ORIGINS = True 
+
+ALLOWED_HOSTS=['*']
 
 # Application definition
 
@@ -64,7 +66,7 @@ MIDDLEWARE = [
     'core.middleware.LoginAttemptsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True 
+
 
 ROOT_URLCONF = 'app.urls'
 
